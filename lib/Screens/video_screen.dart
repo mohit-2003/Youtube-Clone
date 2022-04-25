@@ -65,7 +65,6 @@ class _VideoScreenState extends State<VideoScreen> {
                       ],
                     ),
                     new LinearProgressIndicator(
-                      minHeight: 2,
                       value: 0.3,
                       valueColor: AlwaysStoppedAnimation<Color>(
                         Colors.red,

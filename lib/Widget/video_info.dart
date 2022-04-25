@@ -87,13 +87,20 @@ class _ActionsRow extends StatelessWidget {
   }
 }
 
-class _AuthorInfo extends StatelessWidget {
+class _AuthorInfo extends StatefulWidget {
   final User user;
 
   const _AuthorInfo({
     Key? key,
     required this.user,
   }) : super(key: key);
+
+  @override
+  State<_AuthorInfo> createState() => _AuthorInfoState();
+}
+
+class _AuthorInfoState extends State<_AuthorInfo> {
+  bool notificationIconVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +110,7 @@ class _AuthorInfo extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 15,
-            backgroundImage: new NetworkImage(user.profileImageUrl),
+            backgroundImage: new NetworkImage(widget.user.profileImageUrl),
           ),
           const SizedBox(width: 8.0),
           Expanded(
@@ -113,7 +120,7 @@ class _AuthorInfo extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    user.username,
+                    widget.user.username,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context)
@@ -124,7 +131,7 @@ class _AuthorInfo extends StatelessWidget {
                 ),
                 Flexible(
                   child: Text(
-                    '${user.subscribers} subscribers',
+                    '${widget.user.subscribers} subscribers',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context)
@@ -136,14 +143,24 @@ class _AuthorInfo extends StatelessWidget {
               ],
             ),
           ),
-          TextButton(
-            onPressed: () {},
+          new TextButton(
+            onPressed: () {
+              setState(() {
+                notificationIconVisible = !notificationIconVisible;
+              });
+            },
             child: Text(
-              'SUBSCRIBE',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .copyWith(color: Colors.red),
+              notificationIconVisible ? "SUBSCRIBED" : "SUBSCRIBE",
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  color: notificationIconVisible ? Colors.grey : Colors.red,
+                  fontSize: 16),
+            ),
+          ),
+          new Visibility(
+            visible: notificationIconVisible,
+            child: new IconButton(
+              onPressed: () {},
+              icon: new Icon(Icons.notifications_outlined),
             ),
           )
         ],
