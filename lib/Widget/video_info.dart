@@ -101,6 +101,7 @@ class _AuthorInfo extends StatefulWidget {
 
 class _AuthorInfoState extends State<_AuthorInfo> {
   bool notificationIconVisible = false;
+  bool notificationIconTaps = false;
 
   @override
   Widget build(BuildContext context) {
@@ -147,6 +148,7 @@ class _AuthorInfoState extends State<_AuthorInfo> {
             onPressed: () {
               setState(() {
                 notificationIconVisible = !notificationIconVisible;
+                notificationIconTaps = false;
               });
             },
             child: Text(
@@ -159,8 +161,14 @@ class _AuthorInfoState extends State<_AuthorInfo> {
           new Visibility(
             visible: notificationIconVisible,
             child: new IconButton(
-              onPressed: () {},
-              icon: new Icon(Icons.notifications_outlined),
+              onPressed: () {
+                setState(() {
+                  notificationIconTaps = !notificationIconTaps;
+                });
+              },
+              icon: new Icon(notificationIconTaps
+                  ? Icons.notifications_on
+                  : Icons.notifications_outlined),
             ),
           )
         ],

@@ -12,8 +12,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var videoList = videos;
+
   @override
   Widget build(BuildContext context) {
+    videoList.shuffle();
+
     return new Scaffold(
         body: new CustomScrollView(
       slivers: [
@@ -22,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: new EdgeInsets.only(bottom: 60),
           sliver: new SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
-            final videoItem = videos[index];
+            final videoItem = videoList[index];
             return new VideoItem(video: videoItem);
           }, childCount: 3)),
         )

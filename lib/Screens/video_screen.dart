@@ -15,6 +15,7 @@ class VideoScreen extends StatefulWidget {
 
 class _VideoScreenState extends State<VideoScreen> {
   ScrollController? _scrollController;
+  final suggestedVideoList = suggestedVideos;
 
   @override
   void initState() {
@@ -30,6 +31,8 @@ class _VideoScreenState extends State<VideoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    suggestedVideoList.shuffle();
+
     return GestureDetector(
       onTap: () => context
           .read(miniPlayerControllerProvider)
@@ -78,14 +81,14 @@ class _VideoScreenState extends State<VideoScreen> {
           ),
           SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
-            final videoItem = suggestedVideos[index];
+            final videoItem = suggestedVideoList[index];
             return new VideoItem(
               video: videoItem,
               callback: () => _scrollController!.animateTo(0,
                   duration: new Duration(microseconds: 200),
                   curve: Curves.easeIn),
             );
-          }, childCount: suggestedVideos.length))
+          }, childCount: suggestedVideoList.length))
         ],
       )),
     );
