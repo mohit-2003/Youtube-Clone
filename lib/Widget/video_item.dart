@@ -96,12 +96,126 @@ class VideoItem extends StatelessWidget {
                   ),
                 ),
                 new GestureDetector(
-                    onTap: (() {}), child: new Icon(Icons.more_vert, size: 20))
+                    onTap: (() {
+                      showBottomSheetDialog(context);
+                    }),
+                    child: new Icon(Icons.more_vert, size: 20))
               ],
             ),
           )
         ],
       ),
     );
+  }
+
+  void showBottomSheetDialog(BuildContext context) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        shape:
+            new RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        context: context,
+        builder: (BuildContext ctx) {
+          return new Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              new Padding(
+                padding: EdgeInsets.all(16),
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    new Icon(Icons.watch_later_outlined),
+                    new SizedBox(
+                      width: 24,
+                    ),
+                    new Text("Save to Watch later",
+                        style: new TextStyle(fontSize: 16))
+                  ],
+                ),
+              ),
+              new Padding(
+                padding: EdgeInsets.all(16),
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    new Icon(Icons.library_add_outlined),
+                    new SizedBox(
+                      width: 24,
+                    ),
+                    new Text("Save to playlist",
+                        style: new TextStyle(fontSize: 16))
+                  ],
+                ),
+              ),
+              new Padding(
+                padding: EdgeInsets.all(16),
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    new Icon(Icons.file_download_outlined),
+                    new SizedBox(
+                      width: 24,
+                    ),
+                    new Text("Download video",
+                        style: new TextStyle(fontSize: 16))
+                  ],
+                ),
+              ),
+              new Padding(
+                padding: EdgeInsets.all(16),
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    new Icon(Icons.share_sharp),
+                    new SizedBox(
+                      width: 24,
+                    ),
+                    new Text("Share", style: new TextStyle(fontSize: 16))
+                  ],
+                ),
+              ),
+              new Padding(
+                padding: EdgeInsets.all(16),
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    new Icon(Icons.not_interested_outlined),
+                    new SizedBox(
+                      width: 24,
+                    ),
+                    new Text("Not interested",
+                        style: new TextStyle(fontSize: 16))
+                  ],
+                ),
+              ),
+              new Padding(
+                padding: EdgeInsets.all(16),
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    new Icon(Icons.not_interested_outlined),
+                    new SizedBox(
+                      width: 24,
+                    ),
+                    new Text("Don't recommend channel",
+                        style: new TextStyle(fontSize: 16))
+                  ],
+                ),
+              ),
+              new Padding(
+                padding: EdgeInsets.all(16),
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    new Icon(Icons.flag_outlined),
+                    new SizedBox(
+                      width: 24,
+                    ),
+                    new Text("Report", style: new TextStyle(fontSize: 16))
+                  ],
+                ),
+              ),
+            ],
+          );
+        });
   }
 }

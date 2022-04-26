@@ -35,13 +35,53 @@ class VideoInfo extends StatelessWidget {
           ),
           new SizedBox(height: 16.0),
           _ActionsRow(video: video),
-          new Divider(),
-          _AuthorInfo(user: video.author),
+          new Padding(padding: EdgeInsets.all(0), child: new Divider()),
+          new Padding(
+              padding: EdgeInsets.all(0),
+              child: _AuthorInfo(user: video.author)),
           const Divider(),
+          _commentBox(video: video)
         ],
       ),
     );
   }
+}
+
+Widget _commentBox({Video? video}) {
+  return new Column(children: [
+    new Row(
+      children: [
+        new Text("Comments", style: new TextStyle(fontSize: 14)),
+        new Padding(
+            padding: EdgeInsets.only(left: 8),
+            child: new Text(
+              video!.comments,
+              style: new TextStyle(color: Colors.white38),
+            )),
+        new Spacer(),
+        new Icon(Icons.arrow_drop_down_outlined)
+      ],
+    ),
+    new Padding(
+      padding: EdgeInsets.only(top: 8),
+      child: new Row(
+        children: [
+          new CircleAvatar(
+            radius: 12,
+            foregroundImage: new NetworkImage(video.author.profileImageUrl),
+          ),
+          new Flexible(
+            child: new Padding(
+                padding: EdgeInsets.only(left: 8),
+                child: new Text(video.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: new TextStyle(fontSize: 12))),
+          )
+        ],
+      ),
+    )
+  ]);
 }
 
 class _ActionsRow extends StatelessWidget {
@@ -60,7 +100,7 @@ class _ActionsRow extends StatelessWidget {
         _buildAction(context, Icons.thumb_up_outlined, video.likes),
         _buildAction(context, Icons.thumb_down_outlined, "Dislike"),
         _buildAction(context, Icons.reply_outlined, 'Share'),
-        _buildAction(context, Icons.download_outlined, 'Download'),
+        _buildAction(context, Icons.file_download, 'Download'),
         _buildAction(context, Icons.library_add_outlined, 'Save'),
       ],
     );
